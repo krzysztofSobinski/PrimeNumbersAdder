@@ -6,9 +6,10 @@ using Microsoft.Extensions.Configuration;
 
 namespace PrimeNumbersAdder
 {
-    class Program
+    internal class Program
     {
-        static void Main()
+        private const string InputTextToScanFilename = "inputToScan.txt";
+        internal static void Main()
         {
             var config = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
@@ -20,7 +21,7 @@ namespace PrimeNumbersAdder
                 Environment.Exit(0);
             }
 
-            var inputTextToScan = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "inputToScan.txt"));
+            var inputTextToScan = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, InputTextToScanFilename));
             var primeNumbers = PrimeNumbersFinder.FindWithoutDuplicates(inputTextToScan, config.PrimeNumberLength, config.PrimeNumbersMaxCount);
             if (primeNumbers.Count < config.PrimeNumbersMaxCount)
             {
